@@ -28,7 +28,7 @@ Install
 Download the script:
 
 ```sh
-curl --remote-name https://raw.githubusercontent.com/conorhalloran/laptop/master/mac
+curl --remote-name https://raw.githubusercontent.com/conorhalloran/comp-setup/master/mac
 ```
 
 Review the script (avoid running scripts you haven't read!):
