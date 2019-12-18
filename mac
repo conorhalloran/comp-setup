@@ -161,7 +161,7 @@ EOF
 
 # Ruby Setup
 # TODO - use scripting magic to grab official version from https://github.com/sprk/spark/blob/master/.ruby-version
-rbenv install 2.4.5
+rbenv install 2.5.0
 rbenv rehash
 gem update --system
 gem i bundler
