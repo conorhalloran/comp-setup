@@ -142,14 +142,6 @@ brew "imagemagick"
 brew "libyaml" # should come after openssl
 brew "coreutils"
 brew "yarn"
-
-# Spark recommended stuff
-brew "dashlane"
-brew "firefox"
-brew "iterm2"
-brew "postman"
-brew "psequel"
-brew "slack"
 brew "rbenv"
 brew "ruby-build"
 brew "nodejs"
@@ -158,6 +150,18 @@ brew "nodejs"
 brew "postgres", restart_service: :changed
 brew "redis", restart_service: :changed
 EOF
+
+fancy_echo "Update heroku binary ..."
+brew unlink heroku
+brew link --force heroku
+
+# Spark recommended stuff
+brew "dashlane"
+brew "firefox"
+brew "iterm2"
+brew "postman"
+brew "psequel"
+brew "slack"
 
 # Ruby Setup
 # TODO - use scripting magic to grab official version from https://github.com/sprk/spark/blob/master/.ruby-version
