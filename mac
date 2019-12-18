@@ -126,7 +126,6 @@ brew "tmux"
 brew "vim"
 brew "watchman"
 brew "zsh"
-brew "neovim"
 brew "ripgrep"
 
 # Heroku
