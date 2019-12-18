@@ -156,12 +156,13 @@ brew unlink heroku
 brew link --force heroku
 
 # Spark recommended stuff
-brew "dashlane"
-brew "firefox"
-brew "iterm2"
-brew "postman"
-brew "psequel"
-brew "slack"
+brew cask install "dashlane"
+brew cask install "firefox"
+brew cask install "brave-browser"
+brew cask install "iterm2"
+brew cask install "postman"
+brew cask install "psequel"
+brew cask install "slack"
 
 # Ruby Setup
 # TODO - use scripting magic to grab official version from https://github.com/sprk/spark/blob/master/.ruby-version
