@@ -30,6 +30,17 @@ append_to_zshrc() {
   fi
 }
 
+append_to_file() {
+  local file="$1"
+  local text="$2"
+
+  if ! grep -qs "^$text$" "$file"; then
+    printf "\\n%s\\n" "$text" >> "$file"
+  fi
+}
+
+shell_file="$HOME/.zshrc"
+
 # shellcheck disable=SC2154
 trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
 
@@ -44,7 +55,7 @@ if [ ! -f "$HOME/.zshrc" ]; then
 fi
 
 # shellcheck disable=SC2016
-append_to_zshrc 'export PATH="$HOME/.bin:$PATH"'
+append_to_file "$shell_file" 'export PATH="$HOME/.bin:$PATH"'
 
 HOMEBREW_PREFIX="/usr/local"
 
@@ -81,12 +92,28 @@ case "$SHELL" in
     ;;
 esac
 
+brew_is_installed() {
+  brew list -1 | grep -Fqx "$1"
+}
+
+tap_is_installed() {
+  brew tap | grep -Fqx "$1"
+}
+
 gem_install_or_update() {
   if gem list "$1" --installed > /dev/null; then
+    fancy_echo "Updating %s ..." "$1"
     gem update "$@"
   else
+    fancy_echo "Installing %s ..." "$1"
     gem install "$@"
   fi
+}
+
+app_is_installed() {
+  local app_name
+  app_name=$(echo "$1" | cut -d'-' -f1)
+  find /Applications -iname "$app_name*" -maxdepth 1 | grep -E '.app' > /dev/null
 }
 
 if ! command -v brew >/dev/null; then
@@ -102,12 +129,19 @@ if ! command -v brew >/dev/null; then
     export PATH="/usr/local/bin:$PATH"
 fi
 
-if brew list | grep -Fq brew-cask; then
+# Remove brew-cask since it is now installed as part of brew tap caskroom/cask.
+# See https://github.com/caskroom/homebrew-cask/releases/tag/v0.60.0
+if brew_is_installed 'brew-cask'; then
   fancy_echo "Uninstalling old Homebrew-Cask ..."
-  brew uninstall --force brew-cask
+  brew uninstall --force 'brew-cask'
 fi
 
-fancy_echo "Updating Homebrew formulae ..."
+if tap_is_installed 'caskroom/versions'; then
+  fancy_echo "Uninstalling old Caskroom Versions ..."
+  brew untap caskroom/versions
+fi
+
+fancy_echo "Updating Homebrew ..."
 brew update --force # https://github.com/Homebrew/brew/issues/1151
 brew bundle --file=- <<EOF
 tap "thoughtbot/formulae"
@@ -151,6 +185,8 @@ brew "postgres", restart_service: :changed
 brew "redis", restart_service: :changed
 EOF
 
+append_to_file "$HOME/.gemrc" 'gem: --no-document'
+
 fancy_echo "Update heroku binary ..."
 brew unlink heroku
 brew link --force heroku
@@ -166,9 +202,17 @@ brew cask install slack
 
 # Ruby Setup
 # TODO - use scripting magic to grab official version from https://github.com/sprk/spark/blob/master/.ruby-version
-rbenv install 2.5.0
+rbenv install 2.6.4
+rbenv global 2.6.4
 rbenv rehash
+
+fancy_echo 'Updating Rubygems...'
 gem update --system
-gem i bundler
+gem_install_or_update 'bundler'
+
+fancy_echo "Configuring Bundler ..."
 number_of_cores=$(sysctl -n hw.ncpu)
 bundle config --global jobs $((number_of_cores - 1))
+
+fancy_echo '...Finished Ruby installation checks.'
+fancy_echo 'All done!'
