@@ -25,26 +25,25 @@ Bug reports for older versions are welcome.
 Install
 -------
 
-Download the script:
+Open Terminal and Install xcode select:
+`xcode-select --install`
 
+Download the script:
 ```sh
 curl --remote-name https://raw.githubusercontent.com/conorhalloran/comp-setup/master/mac
 ```
 
 Review the script (avoid running scripts you haven't read!):
-
 ```sh
 less mac
 ```
 
 Execute the downloaded script:
-
 ```sh
 sh mac 2>&1 | tee ~/laptop.log
 ```
 
 Optionally, review the log:
-
 ```sh
 less ~/laptop.log
 ```
@@ -66,13 +65,10 @@ What it sets up
 ---------------
 
 macOS tools:
-
 * [Homebrew] for managing operating system libraries.
-
 [Homebrew]: http://brew.sh/
 
 Unix tools:
-
 * [Exuberant Ctags] for indexing files for vim tab completion
 * [Git] for version control
 * [OpenSSL] for Transport Layer Security (TLS)
@@ -109,11 +105,9 @@ GitHub tools:
 [Hub]: http://hub.github.com/
 
 Image tools:
-
 * [ImageMagick] for cropping and resizing images
 
 Programming languages, package managers, and configuration:
-
 * [Bundler] for managing Ruby libraries
 * [Node.js] and [NPM], for running apps and installing JavaScript packages
 * [Ruby] stable for writing general-purpose code
@@ -127,7 +121,6 @@ Programming languages, package managers, and configuration:
 [Yarn]: https://yarnpkg.com/en/
 
 Databases:
-
 * [Postgres] for storing relational data
 * [Redis] for storing key-value data
 
