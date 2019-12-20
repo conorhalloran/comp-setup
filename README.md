@@ -72,7 +72,6 @@ Download the computer setup repository and move the mac script to your root dire
 
 ```
 git clone git@github.com:conorhalloran/comp-setup.git
-git clone git@github.com:conorhalloran/dotfiles.git
 cp ~/comp-setup/mac ~/mac
 ```
 
