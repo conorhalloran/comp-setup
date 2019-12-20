@@ -223,6 +223,9 @@ mv ~/dotfiles ~/.files
 ln -nsf ~/.files/itermocil ~/.itermocil
 ln -nsf ~/.files/zshrc/.zshrc ~/.zshrc
 
+append_to_file "$HOME/.files/zshrc/.zshrc" 'source $HOME/.zshenv'
+append_to_file "$HOME/.files/zshrc/.zshrc" 'eval "$(rbenv init - zsh)"'
+
 fancy_echo "Installing Pdftk ..."
 curl -o ~/Downloads/pdftk_download.pkg https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/pdftk_server-2.02-mac_osx-10.11-setup.pkg
 
