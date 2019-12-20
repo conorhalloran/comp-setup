@@ -183,68 +183,12 @@ brew "postgres", restart_service: :changed
 brew "redis", restart_service: :changed
 EOF
 
-append_to_file "$HOME/.gemrc" 'gem: --no-document'
-append_to_file "$HOME/.zshenv" 'export PATH="$HOME/.rbenv/bin:$PATH"'
+if [ -f "$HOME/comp-setup/laptop" ]; then
+  cp ~/comp-setup/laptop ~/.laptop.local
+fi
 
-fancy_echo "Update heroku binary..."
-brew unlink heroku
-brew link --force heroku
-
-# Spark recommended stuff
-brew cask install brave-browser
-brew cask install dashlane
-brew cask install firefox
-brew cask install iterm2
-brew cask install postman
-brew cask install psequel
-brew cask install slack
-brew cask install visual-studio-code
-
-fancy_echo "Installing Bundler and setting cores..."
-sudo gem install bundler
-
-fancy_echo "Configuring Bundler ..."
-number_of_cores=$(sysctl -n hw.ncpu)
-bundle config --global jobs $((number_of_cores - 1))
-
-# Ruby Setup
-# TODO - use scripting magic to grab official version from https://github.com/sprk/spark/blob/master/.ruby-version
-# rbenv install 2.6.4
-# rbenv global 2.6.4
-# rbenv rehash
-
-fancy_echo "Installing dotfiles, itermocil and Oh My Zsh"
-brew install TomAnthony/brews/itermocil
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-git clone git@github.com:conorhalloran/dotfiles.git
-mv ~/dotfiles ~/.files
-
-ln -nsf ~/.files/itermocil ~/.itermocil
-ln -nsf ~/.files/zshrc/.zshrc ~/.zshrc
-
-append_to_file "$HOME/.files/zshrc/.zshrc" 'source $HOME/.zshenv'
-append_to_file "$HOME/.files/zshrc/.zshrc" 'eval "$(rbenv init - zsh)"'
-
-fancy_echo "Installing Pdftk ..."
-curl -o ~/Downloads/pdftk_download.pkg https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/pdftk_server-2.02-mac_osx-10.11-setup.pkg
-
-pkgutil --expand ~/Downloads/pdftk_download.pkg ~/Downloads/pdftk_package
-
-cd ~ && mkdir /usr/local/Cellar/pdftk /usr/local/Cellar/pdftk/2.02 /usr/local/Cellar/pdftk/2.02/bin /usr/local/Cellar/pdftk/2.02/lib /usr/local/Cellar/pdftk/2.02/share /usr/local/Cellar/pdftk/2.02/share/man /usr/local/Cellar/pdftk/2.02/share/man/man1
-
-mv ~/Downloads/pdftk_package/pdftk.pkg/Payload ~/Downloads/pdftk_package/pdftk.pkg/payload.gz
-
-gunzip ~/Downloads/pdftk_package/pdftk.pkg/payload.gz
-
-cd ~/Downloads/pdftk_package/pdftk.pkg/ && cpio -iv < ~/Downloads/pdftk_package/pdftk.pkg/payload && cd ~
-
-cd ~ && mv Downloads/pdftk_package/pdftk.pkg/bin/pdftk /usr/local/Cellar/pdftk/2.02/bin/pdftk && mv Downloads/pdftk_package/pdftk.pkg/lib/* /usr/local/Cellar/pdftk/2.02/lib/ && mv Downloads/pdftk_package/pdftk.pkg/man/pdftk.1 /usr/local/Cellar/pdftk/2.02/share/man/man1/pdftk.1
-
-brew link pdftk
-brew cleanup
-brew cask cleanup
-brew doctor
-
-# fancy_echo '...Finished Ruby installation checks.'
-fancy_echo 'All done!'
+if [ -f "$HOME/.laptop.local" ]; then
+  fancy_echo "Running your customizations from ~/.laptop.local ..."
+  # shellcheck disable=SC1090
+  . "$HOME/.laptop.local"
+fi
