@@ -42,12 +42,14 @@ fancy_echo "Configuring Bundler ..."
 number_of_cores=$(sysctl -n hw.ncpu)
 bundle config --global jobs $((number_of_cores - 1))
 
-fancy_echo "Installing dotfiles, itermocil and Oh My Zsh"
+fancy_echo "Installing itermocil, Oh My Zsh and dotfiles"
 brew install TomAnthony/brews/itermocil
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-git clone git@github.com:conorhalloran/dotfiles.git
 mv ~/dotfiles ~/.files
+append_to_file "$HOME/.files/zshrc/private" 'export AWS_ACCESS_KEY_ID=""'
+append_to_file "$HOME/.files/zshrc/private" 'export AWS_SECRET_ACCESS_KEY=""'
+append_to_file "$HOME/.files/zshrc/private" 'export SPARK_SEED_ADMIN_EMAIL=""'
 
 ln -nsf ~/.files/itermocil ~/.itermocil
 ln -nsf ~/.files/zshrc/.zshrc ~/.zshrc
@@ -61,6 +63,7 @@ fancy_echo "Installing latest ruby"
 rbenv install 2.6.5
 rbenv global 2.6.5
 rbenv rehash
+gem install bundler
 
 fancy_echo "Installing Spark Ruby"
 rbenv install 2.5.7
