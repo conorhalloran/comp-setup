@@ -1,6 +1,5 @@
 Laptop
 ======
-
 Laptop is a script to set up a macOS laptop for web and mobile development.
 
 It can be run multiple times on the same machine safely.
@@ -9,7 +8,6 @@ based on what is already installed on the machine.
 
 Requirements
 ------------
-
 Support OS:
 * macOS High Sierra (10.13)
 * macOS Mojave (10.14)
@@ -58,9 +56,10 @@ SSH key to your clipboard.
 `cat ~/.ssh/id_rsa.pub | pbcopy`
 Profile > Settings > SSH and GPG Keys > New SSH key.
 
-Download the script:
-```sh
-curl --remote-name https://raw.githubusercontent.com/conorhalloran/comp-setup/master/mac
+Download the computer setup repository and move the mac script to your root directory:
+```
+git clone git@github.com:conorhalloran/comp-setup.git
+cp ~/comp-setup/mac ~/mac
 ```
 
 Review the script (avoid running scripts you haven't read!):
@@ -79,7 +78,6 @@ less ~/laptop.log
 ```
 
 Optionally, [install thoughtbot/dotfiles][dotfiles].
-
 [dotfiles]: https://github.com/thoughtbot/dotfiles#install
 
 Debugging
