@@ -44,7 +44,7 @@ bundle config --global jobs $((number_of_cores - 1))
 
 fancy_echo "Installing itermocil, Oh My Zsh and dotfiles"
 brew install TomAnthony/brews/itermocil
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 mv ~/dotfiles ~/.files
 append_to_file "$HOME/.files/zshrc/private" 'export AWS_ACCESS_KEY_ID=""'
