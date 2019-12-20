@@ -42,6 +42,8 @@ fancy_echo "Configuring Bundler ..."
 number_of_cores=$(sysctl -n hw.ncpu)
 bundle config --global jobs $((number_of_cores - 1))
 
+install_pdftk_script
+
 fancy_echo "Installing itermocil, Oh My Zsh and dotfiles"
 brew install TomAnthony/brews/itermocil
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
@@ -55,27 +57,26 @@ append_to_file "$HOME/.files/zshrc/private" 'export SPARK_SEED_ADMIN_EMAIL=""'
 ln -nsf ~/.files/itermocil ~/.itermocil
 ln -nsf ~/.files/zshrc/.zshrc ~/.zshrc
 ln -nsf ~/.files/zshrc/.zshenv ~/.zshenv
-source ~/.zshrc
 
-fancy_echo "Ruby Setup"
-TODO - use scripting magic to grab official version from https://github.com/sprk/spark/blob/master/.ruby-version
-
-fancy_echo "Installing latest ruby"
-rbenv install 2.6.5
-rbenv global 2.6.5
-rbenv rehash
-gem install bundler
-
-fancy_echo "Installing Spark Ruby"
-rbenv install 2.5.7
-rbenv rehash
-
-fancy_echo '...Finished Ruby installation checks.'
-
-install_pdftk_script
+fancy_echo "Finished setting up your command line interface"
 
 brew cleanup
 brew cask cleanup
 brew doctor
+
+# fancy_echo "Ruby Setup"
+# TODO - use scripting magic to grab official version from https://github.com/sprk/spark/blob/master/.ruby-version
+
+# fancy_echo "Installing latest ruby"
+# rbenv install 2.6.5
+# rbenv global 2.6.5
+# rbenv rehash
+# gem install bundler
+
+# fancy_echo "Installing Spark Ruby"
+# rbenv install 2.5.7
+# rbenv rehash
+
+# fancy_echo '...Finished Ruby installation checks.'
 
 fancy_echo 'All done!'
