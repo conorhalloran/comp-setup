@@ -1,5 +1,6 @@
 Laptop
 ======
+
 Laptop is a script to set up a macOS laptop for web and mobile development.
 
 It can be run multiple times on the same machine safely.
@@ -8,6 +9,7 @@ based on what is already installed on the machine.
 
 Requirements
 ------------
+
 Support OS:
 * macOS High Sierra (10.13)
 * macOS Mojave (10.14)
@@ -18,10 +20,13 @@ Bug reports for older versions are welcome.
 
 Install
 -------
+
 Open Terminal and Install xcode select:
+
 `xcode-select --install`
 
 Create you SSH key and link to your Github Account:
+
 `ssh-keygen -C your.name@spark.re`
 
 Enter a location to save the save the key. Press enter
@@ -29,6 +34,7 @@ to save it in the default location, or enter a new location.
 If you save it in the default location, all ssh connections
 will use this key by default. You should only need to save
 it in a non default location if you use multiple keys.
+
 `# Enter file in which to save the key (/Users/USERNAME/.ssh/id_rsa):`
 
 Long story short... just press enter when prompted for the above.
@@ -53,10 +59,13 @@ echo 'IdentityFile ~/.ssh/id_rsa' >> ~/.ssh/config
 
 Link your SSH key with your Github Account. First, copy the
 SSH key to your clipboard.
+
 `cat ~/.ssh/id_rsa.pub | pbcopy`
+
 Profile > Settings > SSH and GPG Keys > New SSH key.
 
 Download the computer setup repository and move the mac script to your root directory:
+
 ```
 git clone git@github.com:conorhalloran/comp-setup.git
 cp ~/comp-setup/mac ~/mac
@@ -78,16 +87,17 @@ less ~/laptop.log
 ```
 
 Once Script Completes:
+
 In iTerm2:
 Preferences > Profile > Command:
 Send text at start: ssh-add -K
 
 In Terminal, let Github know who you are:
+
 ```
 git config --global user.name "Your Name"
 git config --global user.email your.name@gmail.com
 ```
-
 
 Optionally, [install thoughtbot/dotfiles][dotfiles].
 [dotfiles]: https://github.com/thoughtbot/dotfiles#install
@@ -105,10 +115,12 @@ What it sets up
 ---------------
 
 macOS tools:
+
 * [Homebrew] for managing operating system libraries.
 [Homebrew]: http://brew.sh/
 
 Unix tools:
+
 * [Exuberant Ctags] for indexing files for vim tab completion
 * [Git] for version control
 * [OpenSSL] for Transport Layer Security (TLS)
@@ -131,6 +143,7 @@ Unix tools:
 [Zsh]: http://www.zsh.org/
 
 Heroku tools:
+
 * [Heroku CLI] and [Parity] for interacting with the Heroku API
 
 [Heroku CLI]: https://devcenter.heroku.com/articles/heroku-cli
@@ -145,6 +158,7 @@ Image tools:
 * [ImageMagick] for cropping and resizing images
 
 Programming languages, package managers, and configuration:
+
 * [Bundler] for managing Ruby libraries
 * [Node.js] and [NPM], for running apps and installing JavaScript packages
 * [Ruby] stable for writing general-purpose code
@@ -158,6 +172,7 @@ Programming languages, package managers, and configuration:
 [Yarn]: https://yarnpkg.com/en/
 
 Databases:
+
 * [Postgres] for storing relational data
 * [Redis] for storing key-value data
 
