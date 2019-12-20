@@ -33,6 +33,21 @@ mv ~/dotfiles ~/.files
 ln -nsf ~/.files/itermocil ~/.itermocil
 ln -nsf ~/.files/zshrc/.zshrc ~/.zshrc
 ln -nsf ~/.files/zshrc/.zshenv ~/.zshenv
+source ~/.zshrc
+
+fancy_echo "Ruby Setup"
+TODO - use scripting magic to grab official version from https://github.com/sprk/spark/blob/master/.ruby-version
+
+fancy_echo "Installing latest ruby"
+rbenv install 2.6.5
+rbenv global 2.6.5
+rbenv rehash
+
+fancy_echo "Installing Spark Ruby"
+rbenv install 2.5.7
+rbenv rehash
+
+fancy_echo '...Finished Ruby installation checks.'
 
 fancy_echo "Installing Pdftk ..."
 curl -o ~/Downloads/pdftk_download.pkg https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/pdftk_server-2.02-mac_osx-10.11-setup.pkg
@@ -54,17 +69,4 @@ brew cleanup
 brew cask cleanup
 brew doctor
 
-fancy_echo "Ruby Setup"
-TODO - use scripting magic to grab official version from https://github.com/sprk/spark/blob/master/.ruby-version
-
-fancy_echo "Installing latest ruby"
-rbenv install 2.6.5
-rbenv global 2.6.5
-rbenv rehash
-
-fancy_echo "Installing Spark Ruby"
-rbenv install 2.5.7
-rbenv rehash
-
-fancy_echo '...Finished Ruby installation checks.'
 fancy_echo 'All done!'
