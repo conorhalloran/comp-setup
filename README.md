@@ -57,6 +57,10 @@ echo 'AddKeysToAgent yes' >> ~/.ssh/config
 echo 'IdentityFile ~/.ssh/id_rsa' >> ~/.ssh/config
 ```
 
+Add the new SSH key to your terminal instance to prevent need to enter SSH password:
+
+`ssh-add -K`
+
 Link your SSH key with your Github Account. First, copy the
 SSH key to your clipboard.
 
