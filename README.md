@@ -77,6 +77,18 @@ Optionally, review the log:
 less ~/laptop.log
 ```
 
+Once Script Completes:
+In iTerm2:
+Preferences > Profile > Command:
+Send text at start: ssh-add -K
+
+In Terminal, let Github know who you are:
+```
+git config --global user.name "Your Name"
+git config --global user.email your.name@gmail.com
+```
+
+
 Optionally, [install thoughtbot/dotfiles][dotfiles].
 [dotfiles]: https://github.com/thoughtbot/dotfiles#install
 
