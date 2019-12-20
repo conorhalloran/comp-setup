@@ -10,23 +10,53 @@ based on what is already installed on the machine.
 Requirements
 ------------
 
-We support:
-
-* macOS Mavericks (10.9)
-* macOS Yosemite (10.10)
-* macOS El Capitan (10.11)
-* macOS Sierra (10.12)
+Support OS:
 * macOS High Sierra (10.13)
 * macOS Mojave (10.14)
+* macOS Catalina (10.15)
 
 Older versions may work but aren't regularly tested.
 Bug reports for older versions are welcome.
 
 Install
 -------
-
 Open Terminal and Install xcode select:
 `xcode-select --install`
+
+Create you SSH key and link to your Github Account:
+`ssh-keygen -C your.name@spark.re`
+
+Enter a location to save the save the key. Press enter
+to save it in the default location, or enter a new location.
+If you save it in the default location, all ssh connections
+will use this key by default. You should only need to save
+it in a non default location if you use multiple keys.
+`# Enter file in which to save the key (/Users/USERNAME/.ssh/id_rsa):`
+
+Long story short... just press enter when prompted for the above.
+
+Be sure to add a password to your key to ensure the
+security of our servers. This won't need to be a password
+you remember, as the ssh agent can remember it for you
+(see below). So that being said, the best course of action
+is to use a generated password through Dashlane.
+
+Set your identity in the SSH Config:
+This will fix an issue when running deployments where
+you get permission denied from Github, since our local private
+keys are used by Capistranto when pulling the code.
+
+```
+touch ~/.ssh/config
+echo 'UseKeychain yes' >> ~/.ssh/config
+echo 'AddKeysToAgent yes' >> ~/.ssh/config
+echo 'IdentityFile ~/.ssh/id_rsa' >> ~/.ssh/config
+```
+
+Link your SSH key with your Github Account. First, copy the
+SSH key to your clipboard.
+`cat ~/.ssh/id_rsa.pub | pbcopy`
+Profile > Settings > SSH and GPG Keys > New SSH key.
 
 Download the script:
 ```sh
@@ -77,7 +107,6 @@ Unix tools:
 * [RipGrep] as a faster alternative to the Silver Surfer
 * [Tmux] for saving project state and switching between projects
 * [Watchman] for watching for filesystem events
-* [Zsh] as your shell
 * [Neovim] as the one true editor(tm) that you may choose to ignore
 
 [Exuberant Ctags]: http://ctags.sourceforge.net/
@@ -92,14 +121,12 @@ Unix tools:
 [Zsh]: http://www.zsh.org/
 
 Heroku tools:
-
 * [Heroku CLI] and [Parity] for interacting with the Heroku API
 
 [Heroku CLI]: https://devcenter.heroku.com/articles/heroku-cli
 [Parity]: https://github.com/thoughtbot/parity
 
 GitHub tools:
-
 * [Hub] for interacting with the GitHub API
 
 [Hub]: http://hub.github.com/
