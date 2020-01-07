@@ -90,11 +90,12 @@ Optionally, review the log:
 less ~/laptop.log
 ```
 
-Once Script Completes:
+Once Script Completes
+---------
 
 In iTerm2:
 Preferences > Profile > Command:
-Send text at start: ssh-add -K
+Send text at start: `ssh-add -K`
 
 In Terminal, let Github know who you are:
 
@@ -103,8 +104,40 @@ git config --global user.name "Your Name"
 git config --global user.email your.name@gmail.com
 ```
 
-Optionally, [install thoughtbot/dotfiles][dotfiles].
-[dotfiles]: https://github.com/thoughtbot/dotfiles#install
+Your computer has been through a lot since running this script.
+Restart it and move onto the next step.
+
+Setup Rbenv, Ruby and Spark
+---------
+
+```
+rbenv install 2.5.7
+rbenv global 2.5.7
+rbenv rehash
+gem install bundler
+
+cd ~/whatever-parent-directory-you-decide-to-install-spark-into
+git clone git@github.com:sprk/spark.git
+cd spark
+```
+Create the master key and copy the variable that has been shared with
+you in the Dashlane "Sharing Center" under "Rails - Credentials Master Key"
+`touch config/master.key && open config/master.key`
+
+Populate your private variables in the zshrc private file:
+`SPARK_SEED_ADMIN_EMAIL="first.lastname@spark.re"`
+
+Unless you have received an aws access key id and secret key, leave these variables as is.
+
+Setup your local database and put your computers username in the designated field.
+`cp config/settings.local.example.yml config/settings.local.yml`
+`open config/settings.local.yml`
+
+Ensure yarn is setup correctly.
+`yarn install --check-files`
+
+Create and Populate your local database:
+`rboot`
 
 Debugging
 ---------

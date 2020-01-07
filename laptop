@@ -61,7 +61,6 @@ ln -nsf ~/.files/zshrc/.zshenv ~/.zshenv
 fancy_echo "Finished setting up your command line interface"
 
 brew cleanup
-brew cask cleanup
 brew doctor
 
 # fancy_echo "Ruby Setup"
