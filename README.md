@@ -125,6 +125,7 @@ you in the Dashlane "Sharing Center" under "Rails - Credentials Master Key"
 `touch config/master.key && open config/master.key`
 
 Populate your private variables in the zshrc private file:
+`open ~/.files/zshrc/private`
 `SPARK_SEED_ADMIN_EMAIL="first.lastname@spark.re"`
 
 Unless you have received an aws access key id and secret key, leave these variables as is.
