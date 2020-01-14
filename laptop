@@ -71,6 +71,7 @@ brew doctor
 # rbenv global 2.6.5
 # rbenv rehash
 # gem install bundler
+# gem install rails
 
 # fancy_echo "Installing Spark Ruby"
 # rbenv install 2.5.7

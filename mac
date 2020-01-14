@@ -176,7 +176,6 @@ brew "coreutils"
 brew "yarn"
 brew "rbenv"
 brew "ruby-build"
-brew "nodejs"
 
 # Databases
 brew "postgres", restart_service: :changed
